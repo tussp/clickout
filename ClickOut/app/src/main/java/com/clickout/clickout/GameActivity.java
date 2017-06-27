@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity {
@@ -136,65 +137,10 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(1500);
+        valueAnimator.setInterpolator(new BounceInterpolator());
+        valueAnimator.setDuration(900);
         valueAnimator.start();
 
-
-        // roll back a bit
-        valueAnimator.addListener(new AnimatorListenerAdapter()
-        {
-            @Override
-            public void onAnimationEnd(Animator animation)
-            {
-                secondInitialAnimation();
-            }
-        });
-    }
-
-    private void secondInitialAnimation() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(this.boxTopHeight, this.boxTopHeight - 150);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int value = (int) animation.getAnimatedValue();
-                boxTopHeight = value;
-                boxBottomHeight = value;
-
-                setNewHeight();
-            }
-        });
-
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(200);
-        valueAnimator.start();
-
-        valueAnimator.addListener(new AnimatorListenerAdapter()
-        {
-            @Override
-            public void onAnimationEnd(Animator animation)
-            {
-                thirdInitialAnimation();
-            }
-        });
-    }
-
-    private void thirdInitialAnimation() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(this.boxTopHeight, this.boxViewDefaultSize);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int value = (int) animation.getAnimatedValue();
-                boxTopHeight = value;
-                boxBottomHeight = value;
-
-                setNewHeight();
-            }
-        });
-
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(1000);
-        valueAnimator.start();
     }
 
     private int heightStep = 168;
