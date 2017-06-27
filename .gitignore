@@ -40,6 +40,12 @@ captures/
 .idea/dictionaries
 .idea/libraries
 
+ClickOut/.idea/workspace.xml
+ClickOut/.idea/tasks.xml
+ClickOut/.idea/gradle.xml
+ClickOut/.idea/dictionaries
+ClickOut/.idea/libraries
+
 # Keystore files
 *.jks
 
