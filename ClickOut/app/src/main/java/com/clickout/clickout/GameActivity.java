@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity {
@@ -26,9 +27,8 @@ public class GameActivity extends AppCompatActivity {
 
     private int boxTopHeight;
     private int boxBottomHeight;
+    private int heightStep;
 
-    private int boxTopPadding;
-    private int boxBottomPadding;
 
     private int boxViewDefaultSize;
 
@@ -40,7 +40,6 @@ public class GameActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.game_activity);
-
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -59,19 +58,13 @@ public class GameActivity extends AppCompatActivity {
 
         this.boxTop = (BoxView) this.findViewById(R.id.box_top);
         this.boxTopHeight = screenHeight / 2;
-        this.boxTopPadding = screenHeight / 6;
 
-        boxTop.setColor(Color.RED);
-        boxTop.setText("Player 1");
-        boxTop.setPadding(0, this.boxTopPadding, 0, 0);
+        boxTop.setColor(Color.parseColor("#D32F2F"));
 
         this.boxBottom = (BoxView) this.findViewById(R.id.box_bottom);
         this.boxBottomHeight = screenHeight / 2;
-        this.boxBottomPadding = screenHeight / 6;
 
-        boxBottom.setColor(Color.GREEN);
-        boxBottom.setText("Player 2");
-        boxBottom.setPadding(0, this.boxBottomPadding, 0, 0);
+        boxBottom.setColor(Color.parseColor("#00B8D4"));
 
 
         boxTop.setOnClickListener(new View.OnClickListener() {
@@ -138,80 +131,61 @@ public class GameActivity extends AppCompatActivity {
         });
 
         valueAnimator.setInterpolator(new BounceInterpolator());
-        valueAnimator.setDuration(900);
+        valueAnimator.setDuration(1000);
         valueAnimator.start();
 
     }
 
-    private int heightStep = 168;
-    private int paddingStep = 32;
 
     private void increaseTop(){
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenHeight = size.y;
+        this.heightStep = screenHeight / 7;
+
         this.genericAnimation(this.boxTopHeight, this.boxTopHeight += this.heightStep, new Func() {
             @Override
             public void execute(int value) {
+                checkGameOver();
                 boxTopHeight = value;
                 boxTop.setHeight(boxTopHeight);
-                checkGameOver();
             }
         });
         this.genericAnimation(this.boxBottomHeight, this.boxBottomHeight -= this.heightStep, new Func() {
             @Override
             public void execute(int value) {
+                checkGameOver();
                 boxBottomHeight = value;
                 boxBottom.setHeight(boxBottomHeight);
-                checkGameOver();
             }
         });
-
-        this.genericAnimation(this.boxTopPadding, this.boxTopPadding += this.paddingStep, new Func() {
-            @Override
-            public void execute(int value) {
-                boxTopPadding = value;
-                boxTop.setPadding(0, boxTopPadding, 0, 0);
-            }
-        });
-
-        this.genericAnimation(this.boxBottomPadding, this.boxBottomPadding += this.paddingStep, new Func() {
-            @Override
-            public void execute(int value) {
-                boxBottomPadding = value;
-                boxBottom.setPadding(0, boxBottomPadding, 0, 0);
-            }
-        });
-
     }
 
     private void increaseBottom(){
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenHeight = size.y;
+        this.heightStep = screenHeight / 7;
+
         this.genericAnimation(this.boxTopHeight, this.boxTopHeight -= this.heightStep, new Func() {
             @Override
             public void execute(int value) {
+                checkGameOver();
+
                 boxTopHeight = value;
                 boxTop.setHeight(boxTopHeight);
-                checkGameOver();
             }
         });
         this.genericAnimation(this.boxBottomHeight, this.boxBottomHeight += this.heightStep, new Func() {
             @Override
             public void execute(int value) {
+                checkGameOver();
                 boxBottomHeight = value;
                 boxBottom.setHeight(boxBottomHeight);
-            }
-        });
-
-        this.genericAnimation(this.boxTopPadding, this.boxTopPadding -= this.paddingStep, new Func() {
-            @Override
-            public void execute(int value) {
-                boxTopPadding = value;
-                boxTop.setPadding(0, boxTopPadding, 0, 0);
-            }
-        });
-
-        this.genericAnimation(this.boxBottomPadding, this.boxBottomPadding -= this.paddingStep, new Func() {
-            @Override
-            public void execute(int value) {
-                boxBottomPadding = value;
-                boxBottom.setPadding(0, boxBottomPadding, 0, 0);
             }
         });
     }
@@ -219,9 +193,6 @@ public class GameActivity extends AppCompatActivity {
     private void setNewHeight() {
         this.boxTop.setHeight(this.boxTopHeight);
         this.boxBottom.setHeight(this.boxBottomHeight);
-
-        this.boxTop.setPadding(0, this.boxTopPadding, 0, 0);
-        this.boxBottom.setPadding(0, this.boxBottomPadding, 0, 0);
     }
 
     private void genericAnimation(int oldValue, int newValue, final Func func) {
@@ -234,8 +205,8 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(200);
+        valueAnimator.setInterpolator(new OvershootInterpolator());
+        valueAnimator.setDuration(250);
         valueAnimator.start();
     }
 }
