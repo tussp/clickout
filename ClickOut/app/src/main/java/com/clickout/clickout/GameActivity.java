@@ -206,7 +206,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         valueAnimator.setInterpolator(new OvershootInterpolator());
-        valueAnimator.setDuration(250);
+        valueAnimator.setDuration(400);
         valueAnimator.start();
     }
 }
