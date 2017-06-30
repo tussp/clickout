@@ -3,7 +3,7 @@
 
 
     <item
-        android:drawable="@color/clickOutRed"/>
+        android:drawable="@color/splash_screen_background"/>
 
     <item>
         <bitmap
