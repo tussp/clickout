@@ -45,10 +45,7 @@ public class GameActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.game_activity);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenHeight = size.y;
+        int screenHeight = ScreenUtil.getScreenHeight(this.getWindowManager());
         this.boxViewDefaultSize = screenHeight / 2;
         this.initialized = false;
 
