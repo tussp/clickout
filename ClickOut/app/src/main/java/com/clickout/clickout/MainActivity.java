@@ -1,12 +1,14 @@
 package com.clickout.clickout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,8 +21,13 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/ubuntu_b.ttf");
+        TextView game_title = (TextView)findViewById(R.id.game_title);
+        game_title.setTypeface(custom_font);
 
         Button btnSinglePlayer = (Button) this.findViewById(R.id.btn_single_player);
+        btnSinglePlayer.setTypeface(custom_font);
+
         btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

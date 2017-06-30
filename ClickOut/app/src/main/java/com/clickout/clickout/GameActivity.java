@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -28,10 +30,12 @@ public class GameActivity extends AppCompatActivity {
     private int boxTopHeight;
     private int boxBottomHeight;
     private int heightStep;
+    public boolean initialized;
 
 
     private int boxViewDefaultSize;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,8 @@ public class GameActivity extends AppCompatActivity {
         display.getSize(size);
         int screenHeight = size.y;
         this.boxViewDefaultSize = screenHeight / 2;
+        this.initialized = false;
+
 
         // TODO: do we need to divide the action bar height ?
 //        int actionBarHeight = 0;
@@ -59,29 +65,33 @@ public class GameActivity extends AppCompatActivity {
         this.boxTop = (BoxView) this.findViewById(R.id.box_top);
         this.boxTopHeight = screenHeight / 2;
 
-        boxTop.setColor(Color.parseColor("#D32F2F"));
+        boxTop.setColor(getColor(R.color.player_one_color));
 
         this.boxBottom = (BoxView) this.findViewById(R.id.box_bottom);
         this.boxBottomHeight = screenHeight / 2;
 
-        boxBottom.setColor(Color.parseColor("#00B8D4"));
+        boxBottom.setColor(getColor(R.color.player_two_color));
 
 
         boxTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                increaseTop();
+                if(initialized)
+                    increaseTop();
             }
         });
 
         boxBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                increaseBottom();
+                if(initialized)
+                  increaseBottom();
             }
         });
 
         this.playInitialAnimations();
+
+
     }
 
     private void checkGameOver() {
@@ -130,9 +140,19 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        valueAnimator.addListener(new AnimatorListenerAdapter()
+        {
+            @Override
+            public void onAnimationEnd(Animator animation)
+            {
+                initialized = true;
+            }
+        });
+
         valueAnimator.setInterpolator(new BounceInterpolator());
         valueAnimator.setDuration(1000);
         valueAnimator.start();
+
 
     }
 
@@ -143,7 +163,7 @@ public class GameActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         int screenHeight = size.y;
-        this.heightStep = screenHeight / 7;
+        this.heightStep = screenHeight / 8;
 
         this.genericAnimation(this.boxTopHeight, this.boxTopHeight += this.heightStep, new Func() {
             @Override
@@ -169,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         int screenHeight = size.y;
-        this.heightStep = screenHeight / 7;
+        this.heightStep = screenHeight / 8;
 
         this.genericAnimation(this.boxTopHeight, this.boxTopHeight -= this.heightStep, new Func() {
             @Override

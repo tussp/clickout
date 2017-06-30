@@ -1,42 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical" >
+<RelativeLayout android:id="@+id/RelativeLayout01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/menu_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:text="ClickOut"
+        android:text="CLICKOUT"
+        android:id="@+id/game_title"
         android:layout_marginTop="50dp"
-        android:textSize="40dp"
+        android:textSize="60dp"
+        android:textColor="@color/menu_title"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_single_player"
-        android:layout_marginTop="100dp"
-        android:text="SinglePlayer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="Play"
+        android:textSize="40dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/round_button"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff" />
 
-    <Button
-        android:layout_marginTop="30dp"
-        android:text="MultiPlayer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:layout_marginTop="30dp"
-        android:text="Settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:layout_marginTop="30dp"
-        android:text="Exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</RelativeLayout>
