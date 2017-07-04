@@ -27,4 +27,15 @@
         android:layout_alignParentBottom="true"
         android:textColor="#fff" />
 
+    <Button
+        android:id="@+id/btn_mode"
+        android:text="Mode"
+        android:textSize="30dp"
+        android:layout_width="170dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_button"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff" />
+
 </RelativeLayout>

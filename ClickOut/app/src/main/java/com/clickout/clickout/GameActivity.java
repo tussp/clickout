@@ -45,10 +45,7 @@ public class GameActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.game_activity);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenHeight = size.y;
+        int screenHeight = ScreenUtil.getScreenHeight(this.getWindowManager());
         this.boxViewDefaultSize = screenHeight / 2;
         this.initialized = false;
 
@@ -90,8 +87,6 @@ public class GameActivity extends AppCompatActivity {
         });
 
         this.playInitialAnimations();
-
-
     }
 
     private void checkGameOver() {
@@ -152,13 +147,10 @@ public class GameActivity extends AppCompatActivity {
         valueAnimator.setInterpolator(new BounceInterpolator());
         valueAnimator.setDuration(1000);
         valueAnimator.start();
-
-
     }
 
 
     private void increaseTop(){
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -184,7 +176,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void increaseBottom(){
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
