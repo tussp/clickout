@@ -1,16 +1,16 @@
 package com.clickout.clickout;
-
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Point;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
@@ -18,46 +18,41 @@ import java.util.ArrayList;
 public class AdvancedGameActivity extends AppCompatActivity {
     private ArrayList<BoxView> boxViewsTop;
     private ArrayList<BoxView> boxViewsBottom;
-
-    private LinearLayout topContainer;
-    private LinearLayout bottomContainer;
     private RelativeLayout relativeContainer;
-
+    private int heightStep;
+    private int boxViewWidth;
+    private int boxViewDefaultHeight;
+    private int screenWidth;
+    private int boxViewsCount = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_game);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //set up full screen
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         int screenHeight = ScreenUtil.getScreenHeight(this.getWindowManager());
-        this.heightStep = screenHeight / 17;
-        int containerHeight = screenHeight / 2;
-
-//        this.topContainer = (LinearLayout) this.findViewById(R.id.container_top);
-//        this.bottomContainer = (LinearLayout) this.findViewById(R.id.container_bottom);
-//        this.topContainer.getLayoutParams().height = containerHeight;
-//        this.bottomContainer.getLayoutParams().height = containerHeight;
-
+        this.screenWidth = ScreenUtil.getScreenWidth(this.getWindowManager());
+        this.boxViewWidth = this.screenWidth / this.boxViewsCount;
+        this.heightStep = screenHeight / 26;
+        this.boxViewDefaultHeight = screenHeight / 2;
         this.relativeContainer = (RelativeLayout) this.findViewById(R.id.relative_container);
-        this.relativeContainer.setBackgroundColor(Color.GREEN);
-
         this.boxViewsBottom = new ArrayList<BoxView>();
         this.boxViewsTop = new ArrayList<BoxView>();
+        this.initBoxViews();
+        playInitialAnimations();
+    }
 
-        int currentId = -1;
-        for (int i = 0; i < 20; i += 1) {
-            BoxView boxView = new BoxView(this);
-            boxView.setId(View.generateViewId());
-            boxView.setColor(Color.RED);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(50, containerHeight);
+    private void initBoxViews() {
+        int previousBoxViewId = -1;
+        for (int i = 0; i < this.boxViewsCount; i += 1) {
+            BoxView boxView = this.createBoxView(this.getColor(R.color.player_one_color));
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) boxView.getLayoutParams();
             if (i > 0) {
-                params.addRule(RelativeLayout.RIGHT_OF, currentId);
+                params.addRule(RelativeLayout.RIGHT_OF, previousBoxViewId);
             }
-            boxView.setLayoutParams(params);
+
             final int currentIndex = i;
             boxView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,19 +63,17 @@ public class AdvancedGameActivity extends AppCompatActivity {
 
             this.boxViewsTop.add(boxView);
             this.relativeContainer.addView(boxView);
-            currentId = boxView.getId();
+            previousBoxViewId = boxView.getId();
         }
 
-        for (int i = 0; i < 20; i += 1) {
-            BoxView boxView = new BoxView(this);
-            boxView.setId(View.generateViewId());
-            boxView.setColor(Color.BLUE);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(50, containerHeight);
+        for (int i = 0; i < this.boxViewsCount; i += 1) {
+            BoxView boxView = this.createBoxView(this.getColor(R.color.player_two_color));
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) boxView.getLayoutParams();
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             if (i > 0) {
-                params.addRule(RelativeLayout.RIGHT_OF, currentId);
+                params.addRule(RelativeLayout.RIGHT_OF, previousBoxViewId);
             }
-            boxView.setLayoutParams(params);
+
             final int currentIndex = i;
             boxView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,42 +84,115 @@ public class AdvancedGameActivity extends AppCompatActivity {
 
             this.boxViewsBottom.add(boxView);
             this.relativeContainer.addView(boxView);
-            currentId = boxView.getId();
+            previousBoxViewId = boxView.getId();
         }
     }
 
-    private int heightStep;
+    private void setNewHeight(int index, int topHeight, int bottomHeight) {
+        this.checkGameOver(topHeight, bottomHeight);
 
-    private void increaseTop(int index) {
         BoxView topView = this.boxViewsTop.get(index);
-        int topHeight = topView.getHeight();
         RelativeLayout.LayoutParams topParams = (RelativeLayout.LayoutParams) topView.getLayoutParams();
-        topHeight += this.heightStep;
         topParams.height = topHeight;
         topView.setLayoutParams(topParams);
 
         BoxView bottomView = this.boxViewsBottom.get(index);
-        int bottomHeight = bottomView.getHeight();
         RelativeLayout.LayoutParams bottomParams = (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
-        bottomHeight -= this.heightStep;
         bottomParams.height = bottomHeight;
         bottomView.setLayoutParams(bottomParams);
+    }
 
+
+    private void increaseTop(int index) {
+        BoxView topView = this.boxViewsTop.get(index);
+        BoxView bottomView = this.boxViewsBottom.get(index);
+        this.setNewHeight(index, topView.getHeight() + this.heightStep, bottomView.getHeight() - this.heightStep);
     }
 
     private void increaseBottom(int index) {
         BoxView topView = this.boxViewsTop.get(index);
-        int topHeight = topView.getHeight();
-        RelativeLayout.LayoutParams topParams = (RelativeLayout.LayoutParams) topView.getLayoutParams();
-        topHeight -= this.heightStep;
-        topParams.height = topHeight;
-        topView.setLayoutParams(topParams);
-
         BoxView bottomView = this.boxViewsBottom.get(index);
-        int bottomHeight = bottomView.getHeight();
-        RelativeLayout.LayoutParams bottomParams = (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
-        bottomHeight += this.heightStep;
-        bottomParams.height = bottomHeight;
-        bottomView.setLayoutParams(bottomParams);
+        this.setNewHeight(index, topView.getHeight() - this.heightStep, bottomView.getHeight() + this.heightStep);
+    }
+
+    private BoxView createBoxView(int color) {
+        BoxView boxView = new BoxView(this);
+        boxView.setId(View.generateViewId());
+        boxView.setColor(color);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(this.boxViewWidth, 0);
+        boxView.setLayoutParams(params);
+        return boxView;
+    }
+
+    private void playInitialAnimations() {
+        final ArrayList<ValueAnimator> animators = new ArrayList<>(this.boxViewsTop.size());
+        int animationDuration = 400;
+        final int max = this.boxViewsTop.size();
+        final int middle = max / 2;
+
+        for (int i = 0; i < this.boxViewsTop.size(); i += 1) {
+            final int currentIndex = i;
+            ValueAnimator valueAnimator = ValueAnimator.ofInt(0, this.boxViewDefaultHeight);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    int value = (int) animation.getAnimatedValue();
+                    setNewHeight(currentIndex, value, value);
+                }
+            });
+            valueAnimator.setInterpolator(new OvershootInterpolator());
+            valueAnimator.setDuration(animationDuration);
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    if (currentIndex < max - 1) {
+                        animators.get(currentIndex + 1).start();
+                    }
+                }
+            });
+            animators.add(valueAnimator);
+        }
+
+        animators.get(0).start();
+    }
+
+    private void checkGameOver(int boxTopHeight, int boxBottomHeight) {
+        if (boxBottomHeight < 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Game Over");
+            builder.setMessage("Player 1 win");
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+            builder.setPositiveButton("Ok", null);
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+        } else if (boxTopHeight < 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Game Over");
+            builder.setMessage("Player 2 win");
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+            builder.setPositiveButton("Ok", null);
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        }
     }
 }

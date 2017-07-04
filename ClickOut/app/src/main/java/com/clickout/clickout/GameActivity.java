@@ -87,8 +87,6 @@ public class GameActivity extends AppCompatActivity {
         });
 
         this.playInitialAnimations();
-
-
     }
 
     private void checkGameOver() {
@@ -149,13 +147,10 @@ public class GameActivity extends AppCompatActivity {
         valueAnimator.setInterpolator(new BounceInterpolator());
         valueAnimator.setDuration(1000);
         valueAnimator.start();
-
-
     }
 
 
     private void increaseTop(){
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -181,7 +176,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void increaseBottom(){
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
