@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="600dp">
+
+    <ImageButton
+        android:id="@+id/btn_top_finger"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/ic_fingerprint_white_24dp"
+        android:clickable="true"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/fingercheck_counter"
+        android:textSize="175px"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/fingercheck_default_message_label"
+        android:textSize="50px"
+        android:text="Fingers in place!"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/btn_bottom_finger"
+        android:layout_width="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="30dp"
+        android:clickable="true"
+        android:layout_marginBottom="50dp"
+        android:background="@mipmap/ic_fingerprint_white_24dp"/>
+
+</RelativeLayout>
