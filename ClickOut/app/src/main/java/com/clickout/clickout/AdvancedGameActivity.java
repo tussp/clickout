@@ -1,15 +1,16 @@
 package com.clickout.clickout;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.RelativeLayout;
 
@@ -42,6 +43,12 @@ public class AdvancedGameActivity extends AppCompatActivity {
         this.boxViewsTop = new ArrayList<BoxView>();
         this.initBoxViews();
         playInitialAnimations();
+    }
+
+    private void showFingerCheck() {
+        FingerCheckDialog dialog = new FingerCheckDialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
     }
 
     private void initBoxViews() {
@@ -148,6 +155,8 @@ public class AdvancedGameActivity extends AppCompatActivity {
                     super.onAnimationEnd(animation);
                     if (currentIndex < max - 1) {
                         animators.get(currentIndex + 1).start();
+                    } else if (currentIndex == max - 1) {
+                        showFingerCheck();
                     }
                 }
             });

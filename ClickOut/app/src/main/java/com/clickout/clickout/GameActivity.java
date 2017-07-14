@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -73,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
         boxTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(initialized)
+                if (initialized)
                     increaseTop();
             }
         });
@@ -81,8 +82,8 @@ public class GameActivity extends AppCompatActivity {
         boxBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(initialized)
-                  increaseBottom();
+                if (initialized)
+                    increaseBottom();
             }
         });
 
@@ -90,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void checkGameOver() {
-        if (this.boxBottomHeight < 0){
+        if (this.boxBottomHeight < 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle("Game Over");
@@ -135,12 +136,11 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        valueAnimator.addListener(new AnimatorListenerAdapter()
-        {
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationEnd(Animator animation)
-            {
+            public void onAnimationEnd(Animator animation) {
                 initialized = true;
+                showFingerCheck();
             }
         });
 
@@ -150,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    private void increaseTop(){
+    private void increaseTop() {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -175,7 +175,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void increaseBottom(){
+    private void increaseBottom() {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -219,5 +219,11 @@ public class GameActivity extends AppCompatActivity {
         valueAnimator.setInterpolator(new OvershootInterpolator());
         valueAnimator.setDuration(400);
         valueAnimator.start();
+    }
+
+    private void showFingerCheck() {
+        FingerCheckDialog dialog = new FingerCheckDialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
     }
 }
