@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -23,9 +24,11 @@ public class FingerCheckDialog extends Dialog {
     TextView fingerCheckDefaultMessageLabel;
     private boolean topFingerDown = false;
     private boolean bottomFingerDown = false;
+    private Activity activity;
 
     public FingerCheckDialog(Activity acitvity) {
         super(acitvity);
+        this.activity = acitvity;
     }
 
     @Override
@@ -107,5 +110,20 @@ public class FingerCheckDialog extends Dialog {
             this.timer.cancel();
             this.myCounter = 4;
         }
+    }
+
+    @Override
+    public void dismiss() {
+        this.activity = null;
+        super.dismiss();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            this.activity.finish();
+            this.dismiss();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
