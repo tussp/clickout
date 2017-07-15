@@ -3,10 +3,8 @@ package com.clickout.clickout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -14,24 +12,24 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity {
+    private final String GameScoreKey = "GameScoreKey";
+
     private BoxView boxTop;
     private BoxView boxBottom;
 
     private int boxTopHeight;
     private int boxBottomHeight;
     private int heightStep;
-    public boolean initialized;
+    private boolean initialized;
+    private boolean gameFinished;
 
 
     private int boxViewDefaultSize;
@@ -46,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.game_activity);
 
+        this.gameFinished = false;
         int screenHeight = ScreenUtil.getScreenHeight(this.getWindowManager());
         this.boxViewDefaultSize = screenHeight / 2;
         this.initialized = false;
@@ -91,11 +90,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void checkGameOver() {
+        if (this.gameFinished) {
+            return;
+        }
+
         if (this.boxBottomHeight < 0) {
+            this.gameFinished = true;
+
+            Score score = ScoreManager.getScore(this.GameScoreKey);
+            score.Player1 += 1;
+            ScoreManager.updateScore(this.GameScoreKey, score);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle("Game Over");
-            builder.setMessage("Player 1 win");
+            builder.setMessage("Player 1 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
@@ -104,13 +113,22 @@ public class GameActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            builder.show();
+            builder.setPositiveButton("Ok", null);
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
 
         } else if (this.boxTopHeight < 0) {
+            this.gameFinished = true;
+
+            Score score = ScoreManager.getScore(this.GameScoreKey);
+            score.Player2 += 1;
+            ScoreManager.updateScore(this.GameScoreKey, score);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle("Game Over");
-            builder.setMessage("Player 2 win");
+            builder.setMessage("Player 2 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
@@ -119,7 +137,10 @@ public class GameActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            builder.show();
+            builder.setPositiveButton("Ok", null);
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
         }
     }
 

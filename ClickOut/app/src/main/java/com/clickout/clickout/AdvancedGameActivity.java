@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 public class AdvancedGameActivity extends AppCompatActivity {
+    private final String AdvancedGameScoreKey = "Advanced_Game_Score_key";
+
     private ArrayList<BoxView> boxViewsTop;
     private ArrayList<BoxView> boxViewsBottom;
     private RelativeLayout relativeContainer;
@@ -168,10 +170,14 @@ public class AdvancedGameActivity extends AppCompatActivity {
 
     private void checkGameOver(int boxTopHeight, int boxBottomHeight) {
         if (boxBottomHeight < 0) {
+            Score score = ScoreManager.getScore(this.AdvancedGameScoreKey);
+            score.Player1 += 1;
+            ScoreManager.updateScore(this.AdvancedGameScoreKey, score);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle("Game Over");
-            builder.setMessage("Player 1 win");
+            builder.setMessage("Player 1 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
@@ -186,10 +192,14 @@ public class AdvancedGameActivity extends AppCompatActivity {
             dialog.show();
 
         } else if (boxTopHeight < 0) {
+            Score score = ScoreManager.getScore(this.AdvancedGameScoreKey);
+            score.Player2 += 1;
+            ScoreManager.updateScore(this.AdvancedGameScoreKey, score);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle("Game Over");
-            builder.setMessage("Player 2 win");
+            builder.setMessage("Player 2 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
