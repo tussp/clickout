@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btnMode = (Button) this.findViewById(R.id.btn_mode);
+        btnMode.setTypeface(custom_font);
+
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
