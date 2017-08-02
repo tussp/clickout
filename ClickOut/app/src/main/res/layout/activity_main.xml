@@ -38,8 +38,7 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/mode_button"
-            android:textColor="#fff"
-/>
+            android:textColor="#fff" />
 
     </LinearLayout>
 
