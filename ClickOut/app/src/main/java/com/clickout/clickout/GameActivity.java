@@ -62,12 +62,12 @@ public class GameActivity extends AppCompatActivity {
         this.boxTop = (BoxView) this.findViewById(R.id.box_top);
         this.boxTopHeight = screenHeight / 2;
 
-        boxTop.setColor(getColor(R.color.player_one_color));
+        boxTop.setColor(getColor(R.color.playerOneColor));
 
         this.boxBottom = (BoxView) this.findViewById(R.id.box_bottom);
         this.boxBottomHeight = screenHeight / 2;
 
-        boxBottom.setColor(getColor(R.color.player_two_color));
+        boxBottom.setColor(getColor(R.color.playerTwoColor));
 
 
         boxTop.setOnClickListener(new View.OnClickListener() {

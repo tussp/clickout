@@ -56,7 +56,7 @@ public class AdvancedGameActivity extends AppCompatActivity {
     private void initBoxViews() {
         int previousBoxViewId = -1;
         for (int i = 0; i < this.boxViewsCount; i += 1) {
-            BoxView boxView = this.createBoxView(this.getColor(R.color.player_one_color));
+            BoxView boxView = this.createBoxView(this.getColor(R.color.playerOneColor));
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) boxView.getLayoutParams();
             if (i > 0) {
                 params.addRule(RelativeLayout.RIGHT_OF, previousBoxViewId);
@@ -76,7 +76,7 @@ public class AdvancedGameActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < this.boxViewsCount; i += 1) {
-            BoxView boxView = this.createBoxView(this.getColor(R.color.player_two_color));
+            BoxView boxView = this.createBoxView(this.getColor(R.color.playerTwoColor));
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) boxView.getLayoutParams();
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             if (i > 0) {

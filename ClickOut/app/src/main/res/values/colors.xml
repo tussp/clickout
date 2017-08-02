@@ -3,17 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="splash_screen_background">#000</color>
-    <color name="menu_title">#FFFFFF</color>
-    <color name="menu_background">#000000</color>
-    <color name="menu_button">#D32F2F</color>
-    <color name="menu_button_click">#B71C1C</color>
-    <color name="player_one_color">#D32F2F</color>
-    <color name="player_two_color">#00B8D4</color>
-
-
-
-
-
+    <color name="splashScreenBackground">#000</color>
+    <color name="menuTitle">#FFFFFF</color>
+    <color name="menuBackground">#000000</color>
+    <color name="menuButton">#D32F2F</color>
+    <color name="menuButtonClick">#B71C1C</color>
+    <color name="playerOneColor">#D32F2F</color>
+    <color name="playerTwoColor">#00B8D4</color>
 
 </resources>
