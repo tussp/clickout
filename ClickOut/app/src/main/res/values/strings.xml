@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ClickOut</string>
+    <string name="game_title">CLICKOUT</string>
+    <string name="play">Play</string>
+    <string name="mode">Mode</string>
+
+
 </resources>

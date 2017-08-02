@@ -10,5 +10,7 @@
     <color name="menuButtonClick">#B71C1C</color>
     <color name="playerOneColor">#D32F2F</color>
     <color name="playerTwoColor">#00B8D4</color>
+    <color name="bottomBarBackground">#e2e2e2</color>
+
 
 </resources>
