@@ -116,7 +116,10 @@ public class GameActivity extends AppCompatActivity {
             builder.setPositiveButton("Ok", null);
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+//            dialog.show();
+
+            Intent intent = new Intent(this, EndGameActivity.class);
+            startActivity(intent);
 
         } else if (this.boxTopHeight < 0) {
             this.gameFinished = true;
@@ -140,7 +143,9 @@ public class GameActivity extends AppCompatActivity {
             builder.setPositiveButton("Ok", null);
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+//            dialog.show();
+            Intent intent = new Intent(this, EndGameActivity.class);
+            startActivity(intent);
         }
     }
 

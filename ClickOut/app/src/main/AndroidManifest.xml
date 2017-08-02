@@ -31,6 +31,11 @@
             android:name=".AdvancedGameActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".EndGameActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
 
     </application>
 
