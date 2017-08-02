@@ -75,11 +75,13 @@
         <Button
             android:id="@+id/btn_exit"
             android:text=""
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_exit_to_app"
             android:background="@drawable/round_button"
             android:textColor="#fff"
-            android:layout_margin="20dp" />
+            android:layout_margin="20dp"
+            android:padding="10dp" />
 
     </LinearLayout>
 
