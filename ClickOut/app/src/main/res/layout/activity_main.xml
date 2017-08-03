@@ -22,22 +22,23 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_single_player"
-            android:text="@string/play"
             android:textSize="35sp"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/play_button"
+            android:src="@drawable/ic_play_arrow"
             android:textColor="#fff" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_mode"
             android:text="@string/mode"
             android:textSize="35sp"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/mode_button"
+            android:src="@drawable/ic_touch_app"
             android:textColor="#fff" />
 
     </LinearLayout>

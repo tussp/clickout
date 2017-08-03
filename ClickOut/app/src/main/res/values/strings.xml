@@ -3,6 +3,8 @@
     <string name="game_title">CLICKOUT</string>
     <string name="play">Play</string>
     <string name="mode">Mode</string>
+    <string name="fingers_notice">Get in position!</string>
+
 
 
 </resources>

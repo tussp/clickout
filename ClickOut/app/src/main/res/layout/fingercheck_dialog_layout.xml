@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="600dp">
+    android:layout_height="fill_parent"
+    android:padding="50dp">
 
     <ImageButton
         android:id="@+id/btn_top_finger"
@@ -10,11 +11,12 @@
         android:layout_height="100dp"
         android:background="@drawable/ic_fingerprint"
         android:clickable="true"
-        android:layout_marginTop="50dp" />
+        android:rotation="180"/>
 
     <TextView
         android:id="@+id/fingercheck_counter"
-        android:textSize="175px"
+        android:textSize="200sp"
+        android:textStyle="bold"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/white"
@@ -23,8 +25,10 @@
 
     <TextView
         android:id="@+id/fingercheck_default_message_label"
-        android:textSize="50px"
-        android:text="Fingers in place!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:text="@string/fingers_notice"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/white"
@@ -34,11 +38,10 @@
     <ImageButton
         android:id="@+id/btn_bottom_finger"
         android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_height="100dp"
-        android:clickable="true"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/ic_fingerprint"/>
+        android:background="@drawable/ic_fingerprint"
+        android:clickable="true" />
 
 </RelativeLayout>

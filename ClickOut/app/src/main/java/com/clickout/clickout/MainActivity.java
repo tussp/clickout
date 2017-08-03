@@ -3,6 +3,7 @@ package com.clickout.clickout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         TextView game_title = (TextView)findViewById(R.id.game_title);
         game_title.setTypeface(custom_font);
 
-        Button btnSinglePlayer = (Button) this.findViewById(R.id.btn_single_player);
-        btnSinglePlayer.setTypeface(custom_font);
+        ImageButton btnSinglePlayer = (ImageButton) this.findViewById(R.id.btn_single_player);
 
         btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnMode = (Button) this.findViewById(R.id.btn_mode);
-        btnMode.setTypeface(custom_font);
+        ImageButton btnMode = (ImageButton) this.findViewById(R.id.btn_mode);
 
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override

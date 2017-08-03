@@ -81,7 +81,7 @@ public class FingerCheckDialog extends Dialog {
             }
         });
 
-        this.timer = new CountDownTimer(6000, 1000) {
+        this.timer = new CountDownTimer(6000, 700) {
             @Override
             public void onTick(long l) {
                 myCounter -= 1;
