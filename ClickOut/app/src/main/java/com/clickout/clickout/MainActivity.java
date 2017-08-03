@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //set up full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -46,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 showSelectModeDialog();
             }
+        });
+
+
+        ImageButton btnSettings = (ImageButton) findViewById(R.id.btn_settings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 navigateToSettings();
+             }
         });
 
 
@@ -85,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigateToSinglePlayerGame() {
         Intent intent = new Intent(this, this.selectedGameType);
+        startActivity(intent);
+    }
+
+    private void navigateToSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
