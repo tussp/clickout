@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:background="@drawable/ic_fingerprint"
         android:clickable="true"
-        android:rotation="180"/>
+        android:rotation="180" />
 
     <TextView
         android:id="@+id/fingercheck_counter"

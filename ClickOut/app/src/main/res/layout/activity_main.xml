@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_settings"
-            android:background="@drawable/round_button"
+            android:background="@drawable/user_actions"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp"/>
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_insert_chart"
-            android:background="@drawable/round_button"
+            android:background="@drawable/user_actions"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_exit_to_app"
-            android:background="@drawable/round_button"
+            android:background="@drawable/user_actions"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp" />

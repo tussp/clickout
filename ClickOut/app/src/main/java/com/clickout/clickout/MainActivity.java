@@ -47,6 +47,24 @@ public class MainActivity extends AppCompatActivity {
                 showSelectModeDialog();
             }
         });
+
+
+
+        ImageButton exit = (ImageButton) findViewById(R.id.btn_exit);
+        exit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO Auto-generated method stub
+                finish();
+                Runtime.getRuntime().exit(0);
+                System.exit(0);
+            }
+
+        });
+
+
     }
 
     private void showSelectModeDialog() {
