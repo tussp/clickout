@@ -12,12 +12,22 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class GameActivity extends AppCompatActivity {
     private final String GameScoreKey = "GameScoreKey";
@@ -34,6 +44,28 @@ public class GameActivity extends AppCompatActivity {
 
     private int boxViewDefaultSize;
 
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://6bd78032.ngrok.io/");
+        } catch (URISyntaxException e) {
+        }
+    }
+
+    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (initialized) {
+                        increaseTop();
+                    }
+                }
+            });
+        }
+    };
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +80,8 @@ public class GameActivity extends AppCompatActivity {
         int screenHeight = ScreenUtil.getScreenHeight(this.getWindowManager());
         this.boxViewDefaultSize = screenHeight / 2;
         this.initialized = false;
+
+        mSocket.connect();
 
 
         // TODO: do we need to divide the action bar height ?
@@ -70,18 +104,19 @@ public class GameActivity extends AppCompatActivity {
         boxBottom.setColor(getColor(R.color.playerTwoColor));
 
 
-        boxTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (initialized)
-                    increaseTop();
-            }
-        });
+//        boxTop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (initialized)
+//                    increaseTop();
+//            }
+//        });
 
         boxBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (initialized)
+                    mSocket.emit("new message", "");
                     increaseBottom();
             }
         });
@@ -120,6 +155,7 @@ public class GameActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
 
         } else if (this.boxTopHeight < 0) {
             this.gameFinished = true;
@@ -146,6 +182,7 @@ public class GameActivity extends AppCompatActivity {
 //            dialog.show();
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 
@@ -166,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 initialized = true;
-                showFingerCheck();
+//                showFingerCheck();
             }
         });
 
