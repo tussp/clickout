@@ -28,6 +28,7 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/play_button"
+            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_play_arrow"
             android:textColor="#fff" />
 
@@ -38,6 +39,7 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/mode_button"
+            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_touch_app"
             android:textColor="#fff" />
 
@@ -57,6 +59,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_settings"
             android:background="@drawable/user_actions"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp"/>
@@ -68,6 +71,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_insert_chart"
             android:background="@drawable/user_actions"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp" />
@@ -79,6 +83,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_exit_to_app"
             android:background="@drawable/user_actions"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
             android:padding="10dp" />
