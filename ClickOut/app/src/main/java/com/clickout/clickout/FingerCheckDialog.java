@@ -2,11 +2,13 @@ package com.clickout.clickout;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -87,6 +89,8 @@ public class FingerCheckDialog extends Dialog {
                 myCounter -= 1;
                 fingerCheckCounterLabel.setText(Integer.toString(myCounter));
                 if (myCounter == 0) {
+                    Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(500);
                     dismiss();
                 }
             }

@@ -2,14 +2,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/app_name">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="sounds"
-        android:title="Sounds" />
+    <PreferenceCategory
+        android:title="@string/device_options"
+        android:key="sound_prefs">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="sounds"
+            android:title="@string/sounds" />
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="sounds"
-        android:title="Vibration" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="sounds"
+            android:title="@string/vibration" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
