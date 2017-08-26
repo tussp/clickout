@@ -2,8 +2,8 @@
 <RelativeLayout android:id="@+id/RelativeLayout01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/menuBackground"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/menuBackground">
 
     <TextView
         android:text="@string/game_title"
@@ -17,6 +17,7 @@
         android:gravity="center" />
 
     <LinearLayout
+        android:id="@+id/spl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -28,9 +29,12 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/play_button"
-            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_play_arrow"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:elevation="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="15dp"/>
 
         <ImageButton
             android:id="@+id/btn_mode"
@@ -39,9 +43,12 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/mode_button"
-            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_touch_app"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:elevation="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp" />
 
     </LinearLayout>
 
@@ -59,10 +66,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_settings"
             android:background="@drawable/user_actions"
-            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
-            android:padding="15dp"/>
+            android:padding="15dp"
+            android:elevation="5dp"/>
 
         <ImageButton
             android:id="@+id/btn_stats"
@@ -71,22 +78,22 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_insert_chart"
             android:background="@drawable/user_actions"
-            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:elevation="5dp"/>
 
         <ImageButton
             android:id="@+id/btn_exit"
             android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_exit_to_app"
+            android:src="@drawable/ic_exit"
             android:background="@drawable/user_actions"
-            android:foreground="?android:attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_margin="20dp"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:elevation="5dp"/>
 
     </LinearLayout>
 

@@ -4,15 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="splashScreenBackground">#000</color>
-    <color name="menuTitle">#FFFFFF</color>
-    <color name="menuBackground">#000000</color>
+    <color name="menuTitle">#fff</color>
+    <color name="menuBackground">#000</color>
     <color name="menuButton">#D32F2F</color>
     <color name="menuButtonClick">#B71C1C</color>
-    <color name="playerOneColor">#D32F2F</color>
-    <color name="playerTwoColor">#00B8D4</color>
+    <color name="playerOneColor">#FF196B</color>
+    <color name="playerTwoColor">#64FF71</color>
     <color name="userActionsBackground">#fff</color>
-    <color name="userActionsHoverBackground">#607D8B</color>
+    <color name="userActionsHoverBackground">#a7a7a7</color>
     <color name="userActionsColor">#000</color>
-
-
 </resources>
