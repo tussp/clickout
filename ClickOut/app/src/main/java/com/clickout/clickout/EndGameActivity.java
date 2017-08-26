@@ -1,20 +1,72 @@
 package com.clickout.clickout;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class EndGameActivity extends AppCompatActivity {
+
+    public Class selectedGameType = GameActivity.class;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_end_game);
 
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/ubuntu_b.ttf");
+        TextView game_title = (TextView)findViewById(R.id.game_title);
+        game_title.setTypeface(custom_font);
+
+        TextView score_title = (TextView)findViewById(R.id.game_score_title);
+        score_title.setTypeface(custom_font);
+
+        Context c = getBaseContext();
+        Animation scale = AnimationUtils.loadAnimation(c, R.anim.scale);
+        scale.setInterpolator(new LinearInterpolator());
+        Animation rotate = AnimationUtils.loadAnimation(c, R.anim.rotate);
+        rotate.setInterpolator(new LinearInterpolator());
+        AnimationSet as = new AnimationSet(true);
+        as.addAnimation(scale);
+        as.addAnimation(rotate);
+
+        ImageButton replay = (ImageButton)findViewById(R.id.btn_replay);
+        replay.setAnimation(as);
+
+        Score score = ScoreManager.getScore("GameScoreKey");
+
+
+        TextView p1s = (TextView) findViewById(R.id.player_one_score);
+        TextView p2s = (TextView) findViewById(R.id.player_two_score);
+
+        p1s.setTypeface(custom_font);
+        p1s.setText(String.valueOf(score.Player1));
+        p2s.setTypeface(custom_font);
+        p2s.setText(String.valueOf(score.Player2));
+
+
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToSinglePlayerGame();
+            }
+        });
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         //set up full screen
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void navigateToSinglePlayerGame() {
+        Intent intent = new Intent(this, this.selectedGameType);
+        startActivity(intent);
     }
 }

@@ -174,44 +174,16 @@ public class AdvancedGameActivity extends AppCompatActivity {
             score.Player1 += 1;
             ScoreManager.updateScore(this.AdvancedGameScoreKey, score);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(true);
-            builder.setTitle("Game Over");
-            builder.setMessage("Player 1 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
-            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-                }
-            });
-            builder.setPositiveButton("Ok", null);
-            AlertDialog dialog = builder.create();
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+            Intent intent = new Intent(this, EndGameActivity.class);
+            startActivity(intent);
 
         } else if (boxTopHeight < 0) {
             Score score = ScoreManager.getScore(this.AdvancedGameScoreKey);
             score.Player2 += 1;
             ScoreManager.updateScore(this.AdvancedGameScoreKey, score);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(true);
-            builder.setTitle("Game Over");
-            builder.setMessage("Player 2 win\nPlayer 1 Score - " + score.Player1 + "\nPlayer 2 Score - " + score.Player2);
-            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-                }
-            });
-            builder.setPositiveButton("Ok", null);
-            AlertDialog dialog = builder.create();
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+            Intent intent = new Intent(this, EndGameActivity.class);
+            startActivity(intent);
         }
     }
 }

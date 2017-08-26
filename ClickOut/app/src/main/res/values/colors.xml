@@ -9,8 +9,10 @@
     <color name="menuButton">#D32F2F</color>
     <color name="menuButtonClick">#B71C1C</color>
     <color name="playerOneColor">#FF196B</color>
+    <color name="playerPressed">#830d37</color>
     <color name="playerTwoColor">#64FF71</color>
-    <color name="userActionsBackground">#fff</color>
+    <color name="modePressed">#378c3e</color>
+    <color name="userActionsBackground">#FF196B</color>
     <color name="userActionsHoverBackground">#a7a7a7</color>
-    <color name="userActionsColor">#000</color>
+    <color name="userActionsColor">#fff</color>
 </resources>

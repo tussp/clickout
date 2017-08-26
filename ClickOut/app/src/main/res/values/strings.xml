@@ -6,7 +6,9 @@
     <string name="fingers_notice">Get in position!</string>
     <string name="device_options">Sounds and Vibration</string>
     <string name="sounds">Sounds</string>
-    <string name="vibration">Vibration</string>
+    <string name="vibration">Vibration</string>\
+    <string name="score">Game Score</string>
+
 
 
 

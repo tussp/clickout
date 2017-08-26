@@ -13,13 +13,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Class selectedGameType = GameActivity.class;
+    public Class selectedGameType = GameActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
