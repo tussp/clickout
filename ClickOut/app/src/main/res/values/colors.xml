@@ -14,5 +14,5 @@
     <color name="modePressed">#378c3e</color>
     <color name="userActionsBackground">#FF196B</color>
     <color name="userActionsHoverBackground">#a7a7a7</color>
-    <color name="userActionsColor">#fff</color>
+    <color name="userActionsColor">#000</color>
 </resources>

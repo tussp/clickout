@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:state_pressed="false">
-    <shape
-        android:shape="rectangle">
-    <solid android:color="@color/playerOneColor"/>
-    <corners android:bottomLeftRadius="40dp"
-        android:topLeftRadius="40dp"/>
-    </shape>
-</item>
-<item android:state_pressed="true">
-    <shape
-        android:shape="rectangle">
-    <solid android:color="@color/playerPressed"/>
-    <corners android:bottomLeftRadius="40dp"
-        android:topLeftRadius="40dp"/>
-    </shape>
-</item>
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/playerOneColor"/>
+            <corners android:radius="140dp"/>
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/playerPressed"/>
+            <corners android:radius="140dp"/>
+        </shape>
+    </item>
 </selector>

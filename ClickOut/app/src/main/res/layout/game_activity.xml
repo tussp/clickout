@@ -8,19 +8,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <com.clickout.clickout.BoxView
             android:id="@+id/box_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground" />
+            android:layout_height="wrap_content" />
 
         <com.clickout.clickout.BoxView
             android:id="@+id/box_bottom"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground" />
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

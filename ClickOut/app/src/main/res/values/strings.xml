@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">ClickOut</string>
     <string name="game_title">CLICKOUT</string>
+    <string name="mode_select_title">Game Mode</string>
+
     <string name="play">Play</string>
     <string name="mode">Mode</string>
     <string name="fingers_notice">Get in position!</string>
     <string name="device_options">Sounds and Vibration</string>
     <string name="sounds">Sounds</string>
-    <string name="vibration">Vibration</string>\
+    <string name="vibration">Vibration</string>
     <string name="score">Game Score</string>
-
-
-
-
-
+    <string name="player_one_score">0</string>
+    <string name="player_two_score">0</string>
 </resources>

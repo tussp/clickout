@@ -14,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class EndGameActivity extends AppCompatActivity {
-
     public Class selectedGameType = GameActivity.class;
 
     @Override
@@ -26,23 +25,14 @@ public class EndGameActivity extends AppCompatActivity {
         TextView game_title = (TextView)findViewById(R.id.game_title);
         game_title.setTypeface(custom_font);
 
-        TextView score_title = (TextView)findViewById(R.id.game_score_title);
-        score_title.setTypeface(custom_font);
-
         Context c = getBaseContext();
-        Animation scale = AnimationUtils.loadAnimation(c, R.anim.scale);
-        scale.setInterpolator(new LinearInterpolator());
-        Animation rotate = AnimationUtils.loadAnimation(c, R.anim.rotate);
+        Animation rotate = AnimationUtils.loadAnimation(c, R.anim.rotate_replay);
         rotate.setInterpolator(new LinearInterpolator());
-        AnimationSet as = new AnimationSet(true);
-        as.addAnimation(scale);
-        as.addAnimation(rotate);
 
         ImageButton replay = (ImageButton)findViewById(R.id.btn_replay);
-        replay.setAnimation(as);
+        replay.setAnimation(rotate);
 
         Score score = ScoreManager.getScore("GameScoreKey");
-
 
         TextView p1s = (TextView) findViewById(R.id.player_one_score);
         TextView p2s = (TextView) findViewById(R.id.player_two_score);

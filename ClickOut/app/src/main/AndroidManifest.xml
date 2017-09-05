@@ -25,6 +25,14 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ModeSelectActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".StatsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".GameActivity"
             android:screenOrientation="portrait">
         </activity>
