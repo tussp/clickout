@@ -122,6 +122,7 @@ public class GameActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
 
         } else if (this.boxTopHeight < 0) {
             this.gameFinished = true;
@@ -148,6 +149,7 @@ public class GameActivity extends AppCompatActivity {
 //            dialog.show();
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 
@@ -167,7 +169,6 @@ public class GameActivity extends AppCompatActivity {
         valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                initialized = true;
                 showFingerCheck();
             }
         });
@@ -258,5 +259,21 @@ public class GameActivity extends AppCompatActivity {
         FingerCheckDialog dialog = new FingerCheckDialog(this);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                initialized = true;
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        ExitGameCheckDialog.showDialog(this, new Func() {
+            @Override
+            public void execute(int value) {
+                GameActivity.super.onBackPressed();
+            }
+        });
     }
 }
