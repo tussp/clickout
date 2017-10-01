@@ -27,6 +27,7 @@ public class AdvancedGameActivity extends AppCompatActivity {
     private int boxViewDefaultHeight;
     private int screenWidth;
     private int boxViewsCount = 5;
+    private boolean initialized = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,12 @@ public class AdvancedGameActivity extends AppCompatActivity {
         FingerCheckDialog dialog = new FingerCheckDialog(this);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                initialized = true;
+            }
+        });
     }
 
     private void initBoxViews() {
@@ -66,7 +73,9 @@ public class AdvancedGameActivity extends AppCompatActivity {
             boxView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    increaseTop(currentIndex);
+                    if (initialized) {
+                        increaseTop(currentIndex);
+                    }
                 }
             });
 
@@ -87,7 +96,9 @@ public class AdvancedGameActivity extends AppCompatActivity {
             boxView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    increaseBottom(currentIndex);
+                    if (initialized) {
+                        increaseBottom(currentIndex);
+                    }
                 }
             });
 
@@ -176,6 +187,7 @@ public class AdvancedGameActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
 
         } else if (boxTopHeight < 0) {
             Score score = ScoreManager.getScore(this.AdvancedGameScoreKey);
@@ -184,6 +196,7 @@ public class AdvancedGameActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, EndGameActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 }

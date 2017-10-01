@@ -58,5 +58,6 @@ public class EndGameActivity extends AppCompatActivity {
     private void navigateToSinglePlayerGame() {
         Intent intent = new Intent(this, this.selectedGameType);
         startActivity(intent);
+        this.finish();
     }
 }
