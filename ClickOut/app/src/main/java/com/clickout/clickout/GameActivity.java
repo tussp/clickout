@@ -266,4 +266,14 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        ExitGameCheckDialog.showDialog(this, new Func() {
+            @Override
+            public void execute(int value) {
+                GameActivity.super.onBackPressed();
+            }
+        });
+    }
 }

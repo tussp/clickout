@@ -199,4 +199,14 @@ public class AdvancedGameActivity extends AppCompatActivity {
             this.finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        ExitGameCheckDialog.showDialog(this, new Func() {
+            @Override
+            public void execute(int value) {
+                AdvancedGameActivity.super.onBackPressed();
+            }
+        });
+    }
 }
