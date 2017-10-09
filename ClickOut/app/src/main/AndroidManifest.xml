@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clickout.clickout" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -42,6 +45,14 @@
         </activity>
         <activity
             android:name=".EndGameActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".BluetoothSettingsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".BluetoothActivity.BluetoothTestActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

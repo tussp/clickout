@@ -2,6 +2,9 @@
     <string name="app_name">ClickOut</string>
     <string name="game_title">CLICKOUT</string>
     <string name="mode_select_title">Game Mode</string>
+    <string name="bluetooth_settings_title">Bluetooth Multiplayer</string>
+    <string name="turn_on_bluetooth_message">Turn on your bluetooth</string>
+    <string name="bluetooth_paired_devices_title">Paired devices:</string>
 
     <string name="play">Play</string>
     <string name="mode">Mode</string>
