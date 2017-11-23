@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class ModeSelectActivity extends AppCompatActivity {
@@ -23,6 +24,10 @@ public class ModeSelectActivity extends AppCompatActivity {
         TextView mode_select_title = (TextView)findViewById(R.id.mode_select_title);
         mode_select_title.setTypeface(custom_font);
 
+        RadioButton btn_single_field = (RadioButton)findViewById(R.id.btn_default_mode);
+        btn_single_field.setTypeface(custom_font);
+        RadioButton btn_multi_field = (RadioButton)findViewById(R.id.btn_advaned_mode);
+        btn_multi_field.setTypeface(custom_font);
     }
 
 }

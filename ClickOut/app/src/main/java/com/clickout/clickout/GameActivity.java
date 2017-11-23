@@ -14,12 +14,15 @@ import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
+
+import at.wirecube.additiveanimations.additive_animator.AdditiveAnimator;
 
 public class GameActivity extends AppCompatActivity {
     private final String GameScoreKey = "GameScoreKey";
@@ -154,100 +157,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void playInitialAnimations() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, this.boxTopHeight);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int value = (int) animation.getAnimatedValue();
-                boxTopHeight = value;
-                boxBottomHeight = value;
 
-                setNewHeight();
-            }
-        });
-
-        valueAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                showFingerCheck();
-            }
-        });
-
-        valueAnimator.setInterpolator(new BounceInterpolator());
-        valueAnimator.setDuration(1000);
-        valueAnimator.start();
+        AdditiveAnimator.animate(boxTop).height(this.boxTopHeight).setDuration(1000).setInterpolator(new BounceInterpolator()).start();
+        AdditiveAnimator.animate(boxBottom).height(this.boxTopHeight).setDuration(1000).setInterpolator(new BounceInterpolator()).start();
+        showFingerCheck();
     }
 
 
     private void increaseTop() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenHeight = size.y;
-        this.heightStep = screenHeight / 8;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        this.heightStep = screenHeight / 5;
 
-        this.genericAnimation(this.boxTopHeight, this.boxTopHeight += this.heightStep, new Func() {
-            @Override
-            public void execute(int value) {
-                checkGameOver();
-                boxTopHeight = value;
-                boxTop.setHeight(boxTopHeight);
-            }
-        });
-        this.genericAnimation(this.boxBottomHeight, this.boxBottomHeight -= this.heightStep, new Func() {
-            @Override
-            public void execute(int value) {
-                checkGameOver();
-                boxBottomHeight = value;
-                boxBottom.setHeight(boxBottomHeight);
-            }
-        });
+        checkGameOver();
+        AdditiveAnimator.animate(boxTop).height(this.boxTopHeight += this.heightStep).setDuration(250).start();
+        AdditiveAnimator.animate(boxBottom).height(this.boxBottomHeight -= this.heightStep).setDuration(250).start();
+        checkGameOver();
+
     }
 
     private void increaseBottom() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenHeight = size.y;
-        this.heightStep = screenHeight / 8;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        this.heightStep = screenHeight / 5;
 
-        this.genericAnimation(this.boxTopHeight, this.boxTopHeight -= this.heightStep, new Func() {
-            @Override
-            public void execute(int value) {
-                checkGameOver();
+        checkGameOver();
+        AdditiveAnimator.animate(boxTop).height(this.boxTopHeight -= this.heightStep).setDuration(250).start();
+        AdditiveAnimator.animate(boxBottom).height(this.boxBottomHeight += this.heightStep).setDuration(250).start();
+        checkGameOver();
 
-                boxTopHeight = value;
-                boxTop.setHeight(boxTopHeight);
-            }
-        });
-        this.genericAnimation(this.boxBottomHeight, this.boxBottomHeight += this.heightStep, new Func() {
-            @Override
-            public void execute(int value) {
-                checkGameOver();
-                boxBottomHeight = value;
-                boxBottom.setHeight(boxBottomHeight);
-            }
-        });
-    }
-
-    private void setNewHeight() {
-        this.boxTop.setHeight(this.boxTopHeight);
-        this.boxBottom.setHeight(this.boxBottomHeight);
-    }
-
-    private void genericAnimation(int oldValue, int newValue, final Func func) {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(oldValue, newValue);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int value = (int) animation.getAnimatedValue();
-                func.execute(value);
-            }
-        });
-
-        valueAnimator.setInterpolator(new OvershootInterpolator());
-        valueAnimator.setDuration(400);
-        valueAnimator.start();
     }
 
     private void showFingerCheck() {

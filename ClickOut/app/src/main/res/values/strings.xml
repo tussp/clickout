@@ -12,4 +12,7 @@
     <string name="score">Game Score</string>
     <string name="player_one_score">0</string>
     <string name="player_two_score">0</string>
+    <string name="single_field">Single-field</string>
+    <string name="multi_field">Multi-field</string>
+
 </resources>

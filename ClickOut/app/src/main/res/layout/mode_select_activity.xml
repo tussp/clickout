@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ModeSelectLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/menuBackground">
+    android:background="@color/menuBackground"
+    android:orientation="vertical">
 
     <TextView
         android:text="@string/mode_select_title"
@@ -14,7 +15,31 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:textAllCaps="true"/>
 
-</RelativeLayout>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="20dp">
+        <RadioButton
+            android:id="@+id/btn_default_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/single_field"
+            android:textSize="36sp"
+            android:textColor="@color/menuTitle"
+            android:textAllCaps="true"
+            android:buttonTint="@color/playerOneColor"/>
+        <RadioButton
+            android:id="@+id/btn_advaned_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/multi_field"
+            android:textSize="36sp"
+            android:textColor="@color/menuTitle"
+            android:textAllCaps="true"
+            android:buttonTint="@color/playerTwoColor"/>
+    </RadioGroup>
+
+</LinearLayout>

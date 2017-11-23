@@ -22,8 +22,6 @@ public class EndGameActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_end_game);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/ubuntu_b.ttf");
-        TextView game_title = (TextView)findViewById(R.id.game_title);
-        game_title.setTypeface(custom_font);
 
         Context c = getBaseContext();
         Animation rotate = AnimationUtils.loadAnimation(c, R.anim.rotate_replay);
